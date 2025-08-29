@@ -1,0 +1,31 @@
+# Bajaj Finserv Health | Qualifier 1 | JAVA
+
+## Candidate Info
+- Name: Vimal Krishna S
+- Reg No: 22BCE3009
+- Email: vimalkrishna.s2022@vitstudent.ac.in
+
+## Project Description
+This Spring Boot application:
+1. Calls the `generateWebhook` API on startup.
+2. Retrieves webhook URL and JWT access token.
+3. Submits the final SQL query for **Question 1**.
+
+## Final SQL Query (Answer)
+```sql
+SELECT p.AMOUNT AS SALARY,
+       CONCAT(e.FIRST_NAME, ' ', e.LAST_NAME) AS NAME,
+       TIMESTAMPDIFF(YEAR, e.DOB, CURDATE()) AS AGE,
+       d.DEPARTMENT_NAME
+FROM PAYMENTS p
+JOIN EMPLOYEE e ON p.EMP_ID = e.EMP_ID
+JOIN DEPARTMENT d ON e.DEPARTMENT = d.DEPARTMENT_ID
+WHERE DAY(p.PAYMENT_TIME) <> 1
+ORDER BY p.AMOUNT DESC
+LIMIT 1;
+
+Build Instructions:
+mvn clean package
+java -jar target/bfh-qualifier-1.0.0.jar
+
+
